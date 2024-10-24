@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "b25d7872-7f82-4a2d-b3bd-cc111906007b",
+		"name": "JIRA Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39148968"
+	},
+	"item": [
+		{
+			"name": "Login to JIRA",
+			"item": [
+				{
+					"name": "Success Login (200)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// User wants to check success response while access jira\r",
+									"pm.test(\"200 OK\",()=>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/instance/license",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"instance",
+								"license"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized (401)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Check Response when user enter wrong credentials.\r",
+									"pm.test(\"Unauthorized 401\",()=>{\r",
+									"    pm.response.to.have.status(401);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "wrong password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "wrong user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/instance/license",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"instance",
+								"license"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong Path (404)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Check Status when user enter wrong resource path\r",
+									"pm.test(\"Not Found 404\",()=>{\r",
+									"    pm.response.to.have.status(404);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/instance/licensees",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"instance",
+								"licensees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bad Request (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Check for Bad Request When user missing some header details\r",
+									"pm.test(\"Bad Request 400\",()=>{\r",
+									"    pm.response.to.have.status(400);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/instance/licensees",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"instance",
+								"licensees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List Out Project",
+			"item": [
+				{
+					"name": "Get Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let values = response.values; \r",
+									"\r",
+									"pm.test(\"Get All Project Names\",()=>{\r",
+									"    console.log(\"Get All Project Name:\")\r",
+									"    let getNames = values.map((value)=>{\r",
+									"        console.log(value.name);\r",
+									"        return value.name;\r",
+									"    })\r",
+									"    console.log(pm.variables.get(\"projectName\"));\r",
+									"    pm.collectionVariables.set(\"projectIndex\",getNames.indexOf(pm.variables.get(\"projectName\")));\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Get Project Key and Project Id\",()=>{\r",
+									"    let desiredIndex = pm.collectionVariables.get(\"projectIndex\");\r",
+									"\r",
+									"    pm.collectionVariables.set(\"projectKey\",values[desiredIndex].key);\r",
+									"    pm.collectionVariables.set(\"projectId\",values[desiredIndex].id);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/project/search",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"project",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"\r",
+							"pm.test(\"200 OK\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "List Out Issue Type",
+			"item": [
+				{
+					"name": "Get Issue Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response;\r",
+									"let values = response.json();\r",
+									"pm.test(\"Get All Issue types available in respective project\",()=>{\r",
+									"        let getIssueTypes = values.map((value)=>{\r",
+									"            console.log(value.name);\r",
+									"            return value.name;\r",
+									"        })\r",
+									"        let name = pm.collectionVariables.get(\"issueType_Name\");\r",
+									"        pm.collectionVariables.set(\"issueType_Index\",getIssueTypes.indexOf(name));\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Get Issue Type ID\",()=>{\r",
+									"    let index = pm.collectionVariables.get(\"issueType_Index\");\r",
+									"\r",
+									"    pm.collectionVariables.set(\"issueType_Id\",values[index].id);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/issuetype/project?projectId={{projectId}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"issuetype",
+								"project"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{projectId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"\r",
+							"pm.test(\"200 OK\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "List Out Assignee",
+			"item": [
+				{
+					"name": "Get Assignee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Get All Assignee Name\",()=>{\r",
+									"    let getAssignees = response.map((value)=>{\r",
+									"        console.log(value.displayName);\r",
+									"        return value.displayName;\r",
+									"    })\r",
+									"\r",
+									"    let name = pm.collectionVariables.get(\"assigneeName\");\r",
+									"    pm.collectionVariables.set(\"assigneeIndex\",getAssignees.indexOf(name));\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Get Assignee ID\",()=>{\r",
+									"    let index = pm.collectionVariables.get(\"assigneeIndex\");\r",
+									"    pm.collectionVariables.set(\"assigneeId\",response[index].accountId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/user/assignable/search?project={{projectId}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"user",
+								"assignable",
+								"search"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "{{projectId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"\r",
+							"pm.test(\"200 OK\",()=>{\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Create Issue",
+			"item": [
+				{
+					"name": "Create An Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Issue created Successfully\",()=>{\r",
+									"    pm.collectionVariables.set(\"issueKey\",response.key);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{jiraToken}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{jiraUser}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fields\": {\r\n    \"assignee\": {\r\n      \"id\": \"{{assigneeId}}\"\r\n    },\r\n    \"description\": {\r\n      \"content\": [\r\n        {\r\n          \"content\": [\r\n            {\r\n              \"text\": \"Order entry fails when selecting supplier.\",\r\n              \"type\": \"text\"\r\n            }\r\n          ],\r\n          \"type\": \"paragraph\"\r\n        }\r\n      ],\r\n      \"type\": \"doc\",\r\n      \"version\": 1\r\n    },\r\n    \"issuetype\": {\r\n      \"id\": \"{{issueType_Id}}\"\r\n    },\r\n    \"project\": {\r\n      \"id\": \"{{projectId}}\"\r\n    },\r\n    \"summary\": \"{{$randomPhrase}}\"\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/rest/api/3/issue",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"3",
+								"issue"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"\r",
+							"pm.test(\"201 OK\",()=>{\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "projectIndex",
+			"value": 4
+		},
+		{
+			"key": "projectKey",
+			"value": "TP2"
+		},
+		{
+			"key": "projectId",
+			"value": "10005"
+		},
+		{
+			"key": "issueType_Index",
+			"value": 3
+		},
+		{
+			"key": "issueType_Id",
+			"value": "10029"
+		},
+		{
+			"key": "projectName",
+			"value": "Temporary Project 1",
+			"type": "string"
+		},
+		{
+			"key": "assigneeIndex",
+			"value": 3
+		},
+		{
+			"key": "assigneeName",
+			"value": "Thor"
+		},
+		{
+			"key": "assigneeId",
+			"value": "712020:51b394be-116f-43d7-a286-48028b05e6ab"
+		},
+		{
+			"key": "issueType_Name",
+			"value": "Bug",
+			"type": "string"
+		},
+		{
+			"key": "issueKey",
+			"value": "TP2-3"
+		}
+	]
+}
