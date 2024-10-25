@@ -4,14 +4,14 @@
    "assigneeName": "Thor",
    "IssueType_Name": "Bug",
    "jiraUser": "Enter Jira email address",
-   "jiraToken": "Enter your Jira Token"
+   "jiraToken": "Enter Jira Token"
 },
 {
    "projectName": "Temporary Project 2",
    "assigneeName": "Marvel",
    "IssueType_Name": "Story",
    "jiraUser": "Enter Jira email address",
-   "jiraToken": "Enter your Jira Token"
+   "jiraToken": "Enter Jira Token"
 }
 	
 ]
