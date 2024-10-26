@@ -3,15 +3,15 @@
    "projectName": "Temporary Project 1",
    "assigneeName": "Thor",
    "IssueType_Name": "Bug",
-   "jiraUser": "rishab.upadhyaya06@gmail.com",
-   "jiraToken": "ATATT3xFfGF0jxIzm5RJyFVkQXmHdYLNGVzjDOk9HT9VUn-nkFVFJhsM_VJS5myoF3sxsaHADGkpVlMiV15968zpbcQ5eHJjGXAHCpL6w7f7NN32bdZjtewiV8-GjVr9Q9raVnq4ISkJgYPH_-yWJOxsxIz66Pdu8-Zyz7Dqnxel5_sLshcK5SA=F3AE6AF1"
+   "jiraUser": "Enter Your JIRA email address",
+   "jiraToken": "Enter Your JIRA API KEY/Token"
 },
 {
    "projectName": "Temporary Project 2",
    "assigneeName": "Marvel",
    "IssueType_Name": "Story",
-   "jiraUser": "rishab.upadhyaya06@gmail.com",
-   "jiraToken": "ATATT3xFfGF0jxIzm5RJyFVkQXmHdYLNGVzjDOk9HT9VUn-nkFVFJhsM_VJS5myoF3sxsaHADGkpVlMiV15968zpbcQ5eHJjGXAHCpL6w7f7NN32bdZjtewiV8-GjVr9Q9raVnq4ISkJgYPH_-yWJOxsxIz66Pdu8-Zyz7Dqnxel5_sLshcK5SA=F3AE6AF1"
+   "jiraUser": "Enter Your JIRA email address",
+   "jiraToken": "Enter Your JIRA API KEY/Token"
 }
 	
 ]
