@@ -37,21 +37,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -139,21 +124,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -200,21 +170,6 @@
 						}
 					},
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -285,21 +240,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -362,7 +302,7 @@
 									"            console.log(value.name);\r",
 									"            return value.name;\r",
 									"        })\r",
-									"        let name = pm.collectionVariables.get(\"issueType_Name\");\r",
+									"        let name = pm.variables.get(\"IssueType_Name\");\r",
 									"        pm.collectionVariables.set(\"issueType_Index\",getIssueTypes.indexOf(name));\r",
 									"})\r",
 									"\r",
@@ -378,21 +318,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -462,7 +387,7 @@
 									"        return value.displayName;\r",
 									"    })\r",
 									"\r",
-									"    let name = pm.collectionVariables.get(\"assigneeName\");\r",
+									"    let name = pm.variables.get(\"assigneeName\");\r",
 									"    pm.collectionVariables.set(\"assigneeIndex\",getAssignees.indexOf(name));\r",
 									"})\r",
 									"\r",
@@ -477,21 +402,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -566,21 +476,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{jiraToken}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{jiraUser}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -635,6 +530,21 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{jiraToken}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{jiraUser}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -655,54 +565,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "projectIndex",
-			"value": 4
-		},
-		{
-			"key": "projectKey",
-			"value": "TP2"
-		},
-		{
-			"key": "projectId",
-			"value": "10005"
-		},
-		{
-			"key": "issueType_Index",
-			"value": 3
-		},
-		{
-			"key": "issueType_Id",
-			"value": "10029"
-		},
-		{
-			"key": "projectName",
-			"value": "Temporary Project 1",
-			"type": "string"
-		},
-		{
-			"key": "assigneeIndex",
-			"value": 3
-		},
-		{
-			"key": "assigneeName",
-			"value": "Thor"
-		},
-		{
-			"key": "assigneeId",
-			"value": "712020:51b394be-116f-43d7-a286-48028b05e6ab"
-		},
-		{
-			"key": "issueType_Name",
-			"value": "Bug",
-			"type": "string"
-		},
-		{
-			"key": "issueKey",
-			"value": "TP2-3"
 		}
 	]
 }
