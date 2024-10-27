@@ -3,15 +3,15 @@
    "projectName": "Temporary Project 1",
    "assigneeName": "Thor",
    "IssueType_Name": "Bug",
-   "jiraUser": "Enter Your Jira email address",
-   "jiraToken": "Enter Your Jira Token"
+   "jiraUser": "Enter Your JIRA email address",
+   "jiraToken": "Enter Your JIRA API KEY/Token"
 },
 {
    "projectName": "Temporary Project 2",
    "assigneeName": "Marvel",
    "IssueType_Name": "Story",
-   "jiraUser": "Enter Your Jira email address",
-   "jiraToken": "Enter Your Jira Token"
+   "jiraUser": "Enter Your JIRA email address",
+   "jiraToken": "Enter Your JIRA API KEY/Token"
 }
 	
 ]
